@@ -55,11 +55,41 @@ plot(country, cases, las=3, cex.axis=0.7)
 # ggplot2 package
 install.packages("ggplot2")
 library(ggplot2)  # require(ggplot2)
-install.packages("ggplot2")
 
 # If ggplot2 cannot be found by the software: install the devtools package and then install 
 # install.packages("devtools")
 # devtools::install_github("tidyverse/ggplot2")
 
 # save the .RData under the menu File
-# for Windows users: save as "yourprefferredname.RData"=
+# for Windows users: save as "yourprefferredname.RData"
+
+# load the previously saved .RData
+
+# Windows
+# setwd("C:/lab/")
+# Mac users
+# setwd("/Users/yourname/lab/")
+# Linux users
+setwd("~/lab")
+
+load("C:/lab/spatial.RData")
+
+ls() # to check the files: covid
+
+library(ggplot2) # require ggplot2
+
+data(mpg) # data from https://ggplot2.tidyverse.org/reference/mpg.html
+head(mpg)
+
+# key components: data, aes, geometry
+ggplot(mpg, aes(x=displ,y=hwy)) + geom_point() # showing data in points
+ggplot(mpg, aes(x=displ,y=hwy)) + geom_line() # showing data in lines
+ggplot(mpg, aes(x=displ,y=hwy)) + geom_polygon() # showing data in polygons
+
+# checking covid data
+head(covid)
+# using ggplot on the covid data
+ggplot(covid, aes(x=lon, y=lat, size=cases)) + geom_point()
+
+
+
