@@ -21,7 +21,7 @@ bubble(meuse, "zinc")
 bubble(meuse, "zinc", main="Zinc concentration")
 
 # Exercise: bubble copper in red
-bubble(meuse, "copper", main="Cppoer concentration", col="red")
+bubble(meuse, "copper", main="Copper concentration", col="red")
 
 #### Importing new data
 
