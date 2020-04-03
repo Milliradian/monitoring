@@ -1,76 +1,65 @@
-########## R spatial
+# R code for spatial view of points
 
-# spatial frame
-class(meuse)
+install.packages("sp")
+library(sp)
+
+data(meuse)
+
+head(meuse)
 
 # coordinates
-coordinates(meuse) = ~x+y
-class(meuse)
+coordinates(meuse) = ~x+y      # alt+126
 
 plot(meuse)
 
-spplot(meuse, "zinc", main = "zinc concentrations (ppm)")
+spplot(meuse, "zinc")
 
-# Exercise: Plot Copper as a spplot
+# Exercise: plot the spatial amount of copper
+spplot(meuse, "copper", main="Copper concentration")
 
-    
-#### Spatial plots
-             
 bubble(meuse, "zinc")
+bubble(meuse, "zinc", main="Zinc concentration")
 
-bubble(meuse, "zinc", col="blue", main = "zinc concentrations (ppm)")
+# Exercise: bubble copper in red
+bubble(meuse, "copper", main="Cppoer concentration", col="red")
 
-# EXERCISE: bubble copper in red
+#### Importing new data
 
+# download covid_agg.csv from our teaching site and build a folder called lab into C: 
+# put the covid_agg.csv file into the folder lab
 
-################ covid data
-# https://services.arcgis.com/5T5nSi527N4F7luB/arcgis/rest/services/COVID_19_HistoricCasesByCountry(pt)View/FeatureServer
-library(ggplot2)
-
+# setting the working directory: lab
+# Windows
+# setwd("C:/lab/")
+# Mac users
+# setwd("/Users/yourname/lab/")
+# Linux users
 setwd("~/lab")
-# setwd("/Users/utente/lab") #mac
-# setwd("C:/lab/") # windows
 
 covid <- read.table("covid_agg.csv", head=T)
-
-
-# importare dati
-covid <- read.table("covid_agg.csv", head=T)
-
 head(covid)
 
-plot(covid$country,covid$cases) 
-# attach(covid) 
-# plot(country,cases)
-
-plot(covid$country,covid$cases,las=0) # parallel labels
-plot(covid$country,covid$cases,las=1) # horizontal labels
-plot(covid$country,covid$cases,las=2) # perpendicular labels
-plot(covid$country,covid$cases,las=3) # vertical labels
-
-plot(covid$country,covid$cases,las=3,cex.lab=0.5, cex.axis=0.5) # vertical labels
-
-
-# ggplot2
-data(mpg)
-head(mpg)
-
-# data
-# aes
-# tipo di geometria
-ggplot(mpg,aes(x=displ,y=hwy)) + geom_point()
-ggplot(mpg,aes(x=displ,y=hwy)) + geom_line()
-ggplot(mpg,aes(x=displ,y=hwy)) + geom_polygon()
-
-# ggplot di covid
-ggplot(covid,aes(x=lon,y=lat,size=cases)) + geom_point()
-
-# density
-# create dataset for spatstat
 attach(covid)
-covids <- ppp(lon, lat, c(-180,180), c(-90,90))
+plot(country,cases)
 
-d <- density(covids)
+# plot(covid$country,covid$cases)
 
-plot(d)
-points(covids)
+plot(country, cases, las=0) # parallel labels
+plot(country, cases, las=1) # horizontal labels
+plot(country, cases, las=2) # perpendicular labels
+plot(country, cases, las=3) # vertical labels
+
+plot(country, cases, las=3, cex.axis=0.5)
+plot(country, cases, las=3, cex.axis=0.7)
+
+# ggplot2 package
+install.packages("ggplot2")
+library(ggplot2)  # require(ggplot2)
+install.packages("ggplot2")
+
+# If ggplot2 cannot be found by the software: install the devtools package and then install 
+# install.packages("devtools")
+# devtools::install_github("tidyverse/ggplot2")
+
+# save the .RData under the menu File
+# for Windows users: save as "yourprefferredname.RData"=
