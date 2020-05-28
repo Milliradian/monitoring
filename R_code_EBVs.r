@@ -147,7 +147,6 @@ plot(sd_clad_agg, col=cl) # all of the microvariations in the structure of the c
 
 # For comparison
 par(mfrow=c(1,2))
-cl <- colorRampPalette(c('yellow','violet','black'))(100) #
 plotRGB(clad, 1,2,3, stretch="lin")
 plot(sd_clad, col=cl) #or/ plot(sd_clad_agg, col=cl)
 
