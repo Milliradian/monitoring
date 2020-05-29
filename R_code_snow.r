@@ -1,0 +1,87 @@
+### Snow coverage from Copernicus Program
+
+# setting the working directory: lab
+
+# Windows users
+# setwd("C:/lab/")
+# Mac users
+# setwd("/Users/yourname/lab/")
+# Linux users
+setwd("~/lab")
+
+# install required packages 
+install.packages("ncdf4")
+
+# require libraries
+library(ncdf4)
+library(raster)
+
+# import the downloaded file (from: https://land.copernicus.vgt.vito.be/PDF/portal/Application.html) and assign a name
+snowmay <- raster("c_gls_SCE_202005260000_NHEMI_VIIRS_V1.0.1.nc")
+# do not worry if you get the following warning message:
+## Warning message:
+In .getCRSfromGridMap4(atts) : cannot process these parts of the CRS:
+  spatial_ref=GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]]
+GeoTransform=-180 0.01 0 84 0 -0.01
+
+# create a color ramp palette
+cl <- colorRampPalette(c("darkblue","blue","light blue"))(100)
+
+# Exercise: plot the snow cover with the color ramp palette
+plot(snowmay, col=cl)
+
+
+# see the characteristics of the image
+snowmay
+
+# Download the snow.zip from iol website 
+# create a folder in the 'lab' folder called 'snow' and extract images directly to the 'snow' folder
+
+# importing the downloaded images
+#####
+## slow manner
+
+# first set the working directory to the 'snow' folder
+setwd("C:/lab/snow/")
+
+# first import the data with 'raster()' function
+snow2000 <- raster("snow2000r.tif")
+snow2005 <- raster("snow2005r.tif")
+snow2010 <- raster("snow2010r.tif")
+snow2015 <- raster("snow2015r.tif")
+snow2020 <- raster("snow2020r.tif")
+
+# then use 'par()' function to create multiframe graphs
+par(mfrow=c(2,3))
+plot(snow2000, col=cl)
+plot(snow2005, col=cl)
+plot(snow2010, col=cl)
+plot(snow2015, col=cl)
+plot(snow2020, col=cl)
+
+#####
+## quick manner of importing and plotting the data set
+
+# first create list of files with similar pattern by using 'list.files()' function
+rlist <- list.files(pattern = "snow")
+
+# check the list
+rlist
+
+# use 'laplly()' function over a list of vector
+import <- lapply(rlist, raster)
+
+# create a stack of the rasters by using 'stack()' function
+snow.multitemp <- stack(import)
+
+# check the information
+snow.multitemp
+
+# plot the raster stack
+plot(snow.multitemp, col=cl)
+
+#####
+## Predicting the 2025 snow cover
+# go to the IOL website and download 'prediction.r' into the folder 'snow'
+# use 'source()' function to run the 'prediction.r'
+source("prediction.r")
