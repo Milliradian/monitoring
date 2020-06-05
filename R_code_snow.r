@@ -157,4 +157,22 @@ png("my_final_exciting_graph.png")
 plot(final.stack, col=cl)
 dev.off()
 
+###### 
+# 1:1 line with the snow data
+# setwd("~/lab/snow/")
+# setwd("/Users/utente/lab/snow/") #mac
+setwd("C:/lab/snow/") # windows
 
+# fast version of import and plot of many data
+rlist <- list.files(pattern="snow")
+rlist
+import <- lapply(rlist, raster)
+snow.multitemp <- stack(import)
+
+# plot 2010 vs 2020
+plot(snow.multitemp$snow2010r, snow.multitemp$snow2020r)
+abline(0,1, col="red") # because data is simulated the plot is strange
+
+# try 2000 vs 2020
+plot(snow.multitemp$snow2010r, snow.multitemp$snow2020r)
+abline(0,1, col="red") # in this case you can see the trend
