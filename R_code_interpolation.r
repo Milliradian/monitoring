@@ -1,4 +1,10 @@
 # Interpolation
+
+# Steps for interpolation:
+# step 1: explain to spatstat that you have coordinates: function ppp
+# step 2: explain to spatstat that you have ecological data: function marks
+# step 3: make the spatial map: function Smooth
+
 # Download the 'dati_plot55_LAST3.csv' from the IOL website and put it directly into the lab folder
 # the data set contains information about Beech Forest
 
