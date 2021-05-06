@@ -1,5 +1,5 @@
 ####################################################################################
-# R scripts of the Monitoring Ecosystem Changes and Functioning course
+# R scripts of the Monitoring Ecosystem Changes and Functioning course (GCE&SDG)
 ####################################################################################
 
 ####################################################################################
